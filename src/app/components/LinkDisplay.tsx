@@ -1,6 +1,6 @@
-// LinkDisplay Component
 import { useState } from 'react';
 import QRCode from 'react-qr-code';
+import { Clipboard } from 'lucide-react';
 
 const LinkDisplay = ({ link }: { link: string }) => {
   const [copySuccess, setCopySuccess] = useState<string>('');
@@ -13,18 +13,19 @@ const LinkDisplay = ({ link }: { link: string }) => {
 
   return (
     <div className="flex flex-col items-center mt-8 space-y-4">
-      <div className="flex items-center space-x-2">
+      <div className="relative w-full max-w-md">
         <input
           type="text"
           value={link}
           readOnly
-          className="bg-black text-white border border-gray-500 p-2 rounded-lg"
+          className="w-full bg-black text-white border border-gray-500 p-3 rounded-lg pr-10"
         />
         <button
           onClick={copyToClipboard}
-          className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+          className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 hover:text-gray-200"
+          aria-label="Copy to clipboard"
         >
-          Copy Link
+          <Clipboard size={18} />
         </button>
       </div>
       {copySuccess && <p className="text-green-500">{copySuccess}</p>}
